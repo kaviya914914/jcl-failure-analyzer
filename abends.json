@@ -1,0 +1,102 @@
+{
+  "S0C7": {
+    "name": "Data exception",
+    "meaning": "A numeric field contains invalid data, such as spaces or garbage in a packed decimal (COMP-3) field.",
+    "first_checks": [
+      "Look at the input file for non-numeric data in numeric fields",
+      "Find the failing offset in the dump and match it to the compile listing",
+      "Check for uninitialized working-storage fields"
+    ]
+  },
+  "S0C4": {
+    "name": "Protection exception",
+    "meaning": "The program tried to use storage it doesn't own, often a subscript out of range or a bad pointer.",
+    "first_checks": [
+      "Check table subscripts and array bounds",
+      "Check that the calling program passes the right parameters",
+      "Check that the REGION size is large enough"
+    ]
+  },
+  "S0C1": {
+    "name": "Operation exception",
+    "meaning": "The program tried to execute something that isn't a valid instruction, often a bad call to a missing or wrong module.",
+    "first_checks": [
+      "Check that the called module exists and was linked correctly",
+      "Look for a recent recompile or relink of the program"
+    ]
+  },
+  "S806": {
+    "name": "Module not found",
+    "meaning": "The system could not find the program in STEPLIB, JOBLIB or the link list.",
+    "first_checks": [
+      "Check the program name for typos in the EXEC statement",
+      "Check that the load library is in STEPLIB or JOBLIB",
+      "Check that the module was actually promoted to this environment"
+    ]
+  },
+  "S322": {
+    "name": "Time limit exceeded",
+    "meaning": "The job or step ran longer than its TIME limit, sometimes because of an infinite loop.",
+    "first_checks": [
+      "Compare the run time to previous runs of the same job",
+      "Check whether the input volume was unusually large",
+      "Look for a loop condition that never ends"
+    ]
+  },
+  "SB37": {
+    "name": "Out of space (volume)",
+    "meaning": "The output dataset ran out of space on the volume.",
+    "first_checks": [
+      "Increase the SPACE allocation in the DD statement",
+      "Check whether the output was much larger than usual"
+    ]
+  },
+  "SD37": {
+    "name": "Out of space (no secondary)",
+    "meaning": "The primary space was used up and no secondary space was specified.",
+    "first_checks": [
+      "Add a secondary allocation to the SPACE parameter",
+      "Check whether the input volume grew"
+    ]
+  },
+  "SE37": {
+    "name": "Out of space (end of volume)",
+    "meaning": "The dataset needed more extents or volumes than were available.",
+    "first_checks": [
+      "Increase the space or the number of volumes",
+      "Ask the storage team to check free space on the volume"
+    ]
+  },
+  "S013": {
+    "name": "Open error",
+    "meaning": "The dataset could not be opened, often because the DCB attributes don't match or a member is missing.",
+    "first_checks": [
+      "Compare RECFM, LRECL and BLKSIZE between the program and the dataset",
+      "Check that the PDS member name exists"
+    ]
+  },
+  "S913": {
+    "name": "Security violation",
+    "meaning": "The job's user ID is not authorized to access the dataset.",
+    "first_checks": [
+      "Check the RACF access for the job's user ID on that dataset",
+      "Check whether the dataset name or the user ID changed recently"
+    ]
+  },
+  "S878": {
+    "name": "Insufficient virtual storage",
+    "meaning": "The step needed more memory than the REGION allowed.",
+    "first_checks": [
+      "Increase the REGION parameter on the JOB or EXEC statement",
+      "Check whether the input volume grew"
+    ]
+  },
+  "S222": {
+    "name": "Job cancelled",
+    "meaning": "The job was cancelled by an operator or the system, not by the program itself.",
+    "first_checks": [
+      "Check the operator log for who cancelled it and why",
+      "Check whether the job was running past its expected window"
+    ]
+  }
+}
